@@ -1,0 +1,13 @@
+src/main/java/com/gerushays/cs320/exception/DuplicateIdException.java
+src/main/java/com/gerushays/cs320/exception/RecordNotFoundException.java
+src/main/java/com/gerushays/cs320/model/Appointment.java
+src/main/java/com/gerushays/cs320/model/Contact.java
+src/main/java/com/gerushays/cs320/model/Identifiable.java
+src/main/java/com/gerushays/cs320/model/Task.java
+src/main/java/com/gerushays/cs320/repository/InMemoryRepository.java
+src/main/java/com/gerushays/cs320/repository/Repository.java
+src/main/java/com/gerushays/cs320/service/AppointmentService.java
+src/main/java/com/gerushays/cs320/service/ContactService.java
+src/main/java/com/gerushays/cs320/service/TaskService.java
+src/main/java/com/gerushays/cs320/validation/Validation.java
+src/test/java/com/gerushays/cs320/service/AlgorithmsDataStructuresTest.java

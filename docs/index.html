@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerus Hays | Computer Science ePortfolio</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0b1120;
+            --bg-secondary: #111827;
+            --card: #172033;
+            --card-hover: #1d2940;
+            --text: #f8fafc;
+            --muted: #a8b3c7;
+            --accent: #60a5fa;
+            --accent-light: #93c5fd;
+            --border: #26344d;
+            --success: #4ade80;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(circle at top right, #172554 0, transparent 28rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* Navigation */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 78vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 0;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.98;
+            letter-spacing: -0.05em;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-light);
+        }
+
+        .hero-description {
+            color: var(--muted);
+            max-width: 720px;
+            font-size: 1.15rem;
+            margin-top: 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .button.primary {
+            background: var(--accent);
+            color: #07111f;
+            border-color: var(--accent);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        /* General sections */
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            max-width: 700px;
+        }
+
+        /* About */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+        }
+
+        .panel {
+            background: rgba(23, 32, 51, 0.78);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+        }
+
+        .panel p + p {
+            margin-top: 1rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            padding: 0.4rem 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        /* Enhancement cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            min-height: 330px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+            transition: 0.2s ease;
+        }
+
+        .card:hover {
+            background: var(--card-hover);
+            transform: translateY(-4px);
+            border-color: #3b4d6c;
+        }
+
+        .number {
+            color: var(--accent);
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .card-link {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .status {
+            display: inline-block;
+            width: fit-content;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--success);
+        }
+
+        /* Timeline */
+
+        .timeline {
+            border-left: 2px solid var(--border);
+            margin-left: 0.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 2.5rem 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 7px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-item p {
+            color: var(--muted);
+            max-width: 760px;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 0;
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 800px) {
+            .cards,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 6rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container nav-inner">
+        <div class="brand">GERUS HAYS</div>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#enhancements">Enhancements</a>
+            <a href="#evolution">Project Evolution</a>
+            <a href="https://github.com/GerusHays/CS-499-Capstone">GitHub</a>
+        </div>
+    </div>
+</nav>
+
+
+<header class="hero">
+    <div class="container">
+
+        <div class="eyebrow">Computer Science Capstone · CS 499</div>
+
+        <h1>
+            Building better software through
+            <span>testing, automation, and engineering.</span>
+        </h1>
+
+        <p class="hero-description">
+            My computer science ePortfolio documents the evolution of a Java
+            service application from its original CS-320 implementation into
+            a more maintainable and capable software system. The project
+            demonstrates growth in software design, algorithms and data
+            structures, automated testing, and database development.
+        </p>
+
+        <div class="buttons">
+            <a class="button primary"
+               href="https://github.com/GerusHays/CS-499-Capstone">
+                View GitHub Repository
+            </a>
+
+            <a class="button" href="#enhancements">
+                Explore Enhancements
+            </a>
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+<section id="about">
+    <div class="container">
+
+        <div class="section-header">
+            <h2>About This Portfolio</h2>
+            <p>
+                This portfolio represents both where I started in software
+                development and how my approach to building and testing
+                software has developed throughout my Computer Science program.
+            </p>
+        </div>
+
+        <div class="about-grid">
+
+            <div class="panel">
+                <p>
+                    My professional background has given me extensive experience
+                    working with complex systems, testing, integration, and
+                    real-world operations. I am now applying that experience as
+                    I transition further into software test automation and
+                    software engineering.
+                </p>
+
+                <p>
+                    My goal is to combine the perspective I have gained from
+                    testing and operating real systems with stronger software
+                    development skills. Rather than treating testing and
+                    development as completely separate areas, I am especially
+                    interested in building software that is testable,
+                    maintainable, and reliable from the beginning.
+                </p>
+            </div>
+
+            <div class="panel">
+                <strong>Technologies & Focus Areas</strong>
+
+                <div class="skills">
+                    <span class="skill">Java</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">JUnit</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">Automated Testing</span>
+                    <span class="skill">Data Structures</span>
+                    <span class="skill">Algorithms</span>
+                    <span class="skill">Software Design</span>
+                    <span class="skill">CI/CD</span>
+                    <span class="skill">Databases</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="enhancements">
+    <div class="container">
+
+        <div class="section-header">
+            <h2>Capstone Enhancements</h2>
+            <p>
+                Rather than using unrelated projects for each requirement,
+                I chose to progressively enhance the same application. This
+                makes it possible to show how software can evolve as its
+                architecture and requirements become more complex.
+            </p>
+        </div>
+
+        <div class="cards">
+
+            <article class="card">
+                <div class="number">01 / SOFTWARE ENGINEERING</div>
+
+                <h3>Software Design & Engineering</h3>
+
+                <p>
+                    Refactored the original CS-320 services into a more
+                    maintainable architecture using repository abstractions,
+                    dependency injection, shared validation, improved exception
+                    handling, and safer management of application data.
+                </p>
+
+                <span class="status">✓ Enhancement Complete</span>
+
+                <a class="card-link"
+                   href="../enhanced-artifact/">
+                    View Enhanced Artifact →
+                </a>
+            </article>
+
+
+            <article class="card">
+                <div class="number">02 / ALGORITHMS</div>
+
+                <h3>Algorithms & Data Structures</h3>
+
+                <p>
+                    Expanded the application with searching, filtering, and
+                    sorting capabilities while preserving HashMap-based direct
+                    lookup. Contacts and tasks can be searched and sorted, while
+                    appointments support chronological ordering and upcoming
+                    appointment filtering.
+                </p>
+
+                <span class="status">✓ Enhancement Complete</span>
+
+                <a class="card-link"
+                   href="https://github.com/GerusHays/CS-499-Capstone/tree/main/enhanced-artifact">
+                    View Implementation →
+                </a>
+            </article>
+
+
+            <article class="card">
+                <div class="number">03 / DATABASES</div>
+
+                <h3>Database Enhancement</h3>
+
+                <p>
+                    The final enhancement will extend the repository
+                    architecture with persistent database storage, allowing
+                    application data to remain available beyond the lifetime
+                    of the running program.
+                </p>
+
+                <span class="status">In Progress</span>
+
+                <div class="card-link">
+                    Coming Soon
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="evolution">
+    <div class="container">
+
+        <div class="section-header">
+            <h2>Project Evolution</h2>
+            <p>
+                The capstone is designed around improving an existing artifact
+                rather than presenting only the finished result.
+            </p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <h3>Original CS-320 Application</h3>
+                <p>
+                    Developed Contact, Task, and Appointment services in Java
+                    with validation and automated tests based on defined
+                    software requirements.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Architecture & Engineering</h3>
+                <p>
+                    Reworked the project into a cohesive architecture with
+                    reusable repositories, shared validation, clearer
+                    responsibilities, and improved data safety.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Algorithms & Data Structures</h3>
+                <p>
+                    Added practical collection processing through searching,
+                    filtering, Comparators, and sorting while retaining
+                    efficient HashMap lookup when an exact record ID is known.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Database Integration</h3>
+                <p>
+                    The next stage will move the project beyond in-memory
+                    storage by implementing persistent data management through
+                    the existing repository abstraction.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <div class="panel">
+
+            <div class="section-header">
+                <h2>Testing the Enhancement</h2>
+            </div>
+
+            <p>
+                Automated testing was expanded alongside the algorithms and
+                data structures enhancement. The current test suite validates
+                searching, case-insensitive matching, sorting, filtering,
+                empty collections, invalid search input, and chronological
+                appointment behavior.
+            </p>
+
+            <p style="margin-top: 1rem;">
+                <strong>Current enhancement test result:</strong>
+                23 passed · 0 failed
+            </p>
+
+        </div>
+    </div>
+</section>
+
+</main>
+
+
+<footer>
+    <div class="container">
+        Gerus Hays · Computer Science Capstone ePortfolio · 2026
+    </div>
+</footer>
+
+</body>
+</html>

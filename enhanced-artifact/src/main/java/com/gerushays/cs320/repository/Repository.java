@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface Repository<T extends Identifiable> {
     void add(T item);
+    void update(T item);
     Optional<T> findById(String id);
     T requireById(String id);
     void deleteById(String id);

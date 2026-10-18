@@ -17,8 +17,8 @@ public class TaskService {
     public void deleteTask(String id) { tasks.deleteById(id); }
     public Task getTask(String id) { return tasks.requireById(id); }
     public List<Task> getAllTasks() { return tasks.findAll(); }
-    public void updateTaskName(String id, String value) { getTask(id).setName(value); }
-    public void updateTaskDescription(String id, String value) { getTask(id).setDescription(value); }
+    public void updateTaskName(String id, String value) { Task t = getTask(id); t.setName(value); tasks.update(t); }
+    public void updateTaskDescription(String id, String value) { Task t = getTask(id); t.setDescription(value); tasks.update(t); }
 
     // Search both fields so the user does not have to remember exactly where a word was entered.
     public List<Task> searchTasks(String searchTerm) {

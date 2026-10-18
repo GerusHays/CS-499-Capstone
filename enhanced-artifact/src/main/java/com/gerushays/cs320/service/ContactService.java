@@ -17,10 +17,10 @@ public class ContactService {
     public void deleteContact(String id) { contacts.deleteById(id); }
     public Contact getContact(String id) { return contacts.requireById(id); }
     public List<Contact> getAllContacts() { return contacts.findAll(); }
-    public void updateFirstName(String id, String value) { getContact(id).setFirstName(value); }
-    public void updateLastName(String id, String value) { getContact(id).setLastName(value); }
-    public void updatePhone(String id, String value) { getContact(id).setPhone(value); }
-    public void updateAddress(String id, String value) { getContact(id).setAddress(value); }
+    public void updateFirstName(String id, String value) { Contact c = getContact(id); c.setFirstName(value); contacts.update(c); }
+    public void updateLastName(String id, String value) { Contact c = getContact(id); c.setLastName(value); contacts.update(c); }
+    public void updatePhone(String id, String value) { Contact c = getContact(id); c.setPhone(value); contacts.update(c); }
+    public void updateAddress(String id, String value) { Contact c = getContact(id); c.setAddress(value); contacts.update(c); }
 
     // This is a simple linear search because the repository is still small and in memory.
     // It also lets a user search either the first or last name without knowing the contact ID.

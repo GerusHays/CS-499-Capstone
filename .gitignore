@@ -1,0 +1,44 @@
+
+# Archive files
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+
+# Java / Maven build output
+target/
+*.class
+*.jar
+*.war
+
+# IDE configuration
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local SQLite databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example

@@ -20,6 +20,13 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
     }
 
     @Override
+    public void update(T item) {
+        if (item == null) throw new IllegalArgumentException("Item cannot be null.");
+        if (!items.containsKey(item.getId())) throw new RecordNotFoundException(item.getId());
+        items.put(item.getId(), item);
+    }
+
+    @Override
     public Optional<T> findById(String id) {
         validateId(id);
         return Optional.ofNullable(items.get(id));

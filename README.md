@@ -6,7 +6,7 @@ Welcome to my Computer Science Capstone ePortfolio.
 
 This repository documents the progressive enhancement of a Java service application originally developed in **CS-320: Software Testing, Automation, and Quality Assurance**. Rather than using unrelated artifacts for each portion of the capstone, I chose to continue improving the same application so that the repository shows how the software evolved over time.
 
-The project began as three Java services for managing **Contacts, Tasks, and Appointments**. During CS-499, I am expanding the original artifact across three major areas of computer science:
+The project began as three Java services for managing **Contacts, Tasks, and Appointments**. During CS-499, I expanded the original artifact across three major areas of computer science:
 
 - Software Design and Engineering
 - Algorithms and Data Structures
@@ -56,7 +56,7 @@ Contains the original CS-320 project before the capstone enhancements.
 
 ### `enhanced-artifact`
 
-Contains the actively enhanced version of the application. Each CS-499 milestone builds on this version rather than creating an unrelated project.
+Contains the enhanced version of the application. Each CS-499 milestone built on this version rather than creating an unrelated project.
 
 ### `docs`
 
@@ -143,24 +143,22 @@ The current enhancement tests cover:
 - Appointment chronological sorting
 - Upcoming appointment filtering
 
-**Current result: 23 tests passed, 0 failed.**
+**Algorithms runner result: 23 tests passed, 0 failed** (verified in the prior audit; rerun locally using the instructions below).
 
 ---
 
 # Enhancement Three: Databases
 
-The database enhancement is currently in progress.
+The third enhancement adds persistent SQLite storage through JDBC without replacing the existing service layer. `DatabaseManager` initializes three tables and indexes, and the `SqliteContactRepository`, `SqliteTaskRepository`, and `SqliteAppointmentRepository` classes implement the same `Repository<T>` interface as the in-memory repository.
 
-The repository abstraction created during the software design enhancement provides a natural path for adding persistent storage. The goal is to replace or extend the current in-memory implementation with a database-backed repository without requiring major changes to the service layer.
+Implemented features:
+- Persistent create, read, update, and delete operations for contacts, tasks, and appointments
+- Prepared statements and try-with-resources for parameterized SQL and connection cleanup
+- Primary-key, NOT NULL, and length constraints, plus indexes on names and appointment dates
+- Dependency injection so services can switch storage implementations without rewriting business logic
+- A database integration test runner for persistence across connections, constraints, and index verification
 
-Planned areas include:
-
-- Persistent storage
-- Database-backed CRUD operations
-- Data validation and error handling
-- Querying stored records
-- Integration testing
-- Secure and maintainable database access
+See [`DATABASE_ENHANCEMENT.md`](enhanced-artifact/DATABASE_ENHANCEMENT.md) for test instructions and evidence requirements. The SQLite integration runner requires the Maven-managed JDBC driver; its result must be recorded after execution.
 
 ---
 
@@ -180,7 +178,7 @@ I see test automation as a strong bridge between those areas because it requires
 - Python
 - Git / GitHub
 - Automated Testing
-- JUnit
+- Standalone Java test runners
 - Object-Oriented Programming
 - Algorithms and Data Structures
 - Software Architecture
@@ -194,4 +192,9 @@ I see test automation as a strong bridge between those areas because it requires
 
 This project is maintained as part of my **Southern New Hampshire University CS-499 Computer Science Capstone**.
 
-The repository will continue to evolve as the remaining capstone enhancements and final ePortfolio are completed.
+The repository documents the three completed capstone enhancements. Final integration-test results should be added after running the SQLite test suite.
+---
+
+## Running the tests
+
+From `enhanced-artifact/`, use `mvn test-compile dependency:build-classpath -Dmdep.outputFile=classpath.txt` to compile and resolve the SQLite driver. Run the standalone algorithms runner and database integration runner with the compiled classes and the dependency classpath. See [`TESTING.md`](enhanced-artifact/TESTING.md) for platform-specific commands and an evidence checklist. These runners are not JUnit tests; `mvn test` alone does not execute them.

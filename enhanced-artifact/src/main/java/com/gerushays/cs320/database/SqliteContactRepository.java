@@ -17,7 +17,7 @@ public class SqliteContactRepository implements Repository<Contact> {
         String sql = "INSERT INTO contacts(contact_id, first_name, last_name, phone, address) VALUES(?,?,?,?,?)";
         try (Connection cn = db.getConnection(); PreparedStatement ps = cn.prepareStatement(sql)) {
             bind(ps, c); ps.executeUpdate();
-        } catch (SQLException e) { if (isConstraint(e)) throw new DuplicateIdException(c.getId()); throw databaseError(e); }
+        } catch (SQLException e) { if (isDuplicateKey(e)) throw new DuplicateIdException(c.getId()); throw databaseError(e); }
     }
     @Override public void update(Contact c) {
         String sql = "UPDATE contacts SET first_name=?, last_name=?, phone=?, address=? WHERE contact_id=?";
@@ -36,7 +36,7 @@ public class SqliteContactRepository implements Repository<Contact> {
     @Override public int size(){ try(Connection cn=db.getConnection(); Statement st=cn.createStatement(); ResultSet rs=st.executeQuery("SELECT COUNT(*) FROM contacts")){return rs.next()?rs.getInt(1):0;}catch(SQLException e){throw databaseError(e);} }
     private static void bind(PreparedStatement ps, Contact c)throws SQLException{ps.setString(1,c.getId());ps.setString(2,c.getFirstName());ps.setString(3,c.getLastName());ps.setString(4,c.getPhone());ps.setString(5,c.getAddress());}
     private static Contact map(ResultSet rs)throws SQLException{return new Contact(rs.getString("contact_id"),rs.getString("first_name"),rs.getString("last_name"),rs.getString("phone"),rs.getString("address"));}
-    private static boolean isConstraint(SQLException e){return e.getMessage()!=null&&e.getMessage().toLowerCase().contains("constraint");}
+    private static boolean isDuplicateKey(SQLException e){return e.getMessage()!=null && (e.getMessage().contains("UNIQUE constraint failed") || e.getMessage().contains("PRIMARY KEY constraint failed"));}
     private static IllegalStateException databaseError(SQLException e){return new IllegalStateException("Contact database operation failed.",e);}
     private static void validateId(String id){if(id==null||id.isBlank())throw new IllegalArgumentException("ID cannot be null or blank.");}
 }

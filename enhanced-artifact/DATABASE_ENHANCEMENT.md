@@ -23,3 +23,9 @@ The repository initializes the schema automatically. `src/main/resources/schema.
 
 ## Security and reliability
 Prepared statements are used for CRUD values, database constraints provide a second layer of validation, resources are closed with try-with-resources, and repository exceptions prevent silent failures when records are missing or duplicated.
+
+## Persistence and database validation
+
+The `SqliteIntegrationTest` standalone runner uses a temporary file-backed database, closes/reopens connections through new `DatabaseManager` and repository instances, and verifies that contact, task, and appointment CRUD changes survive reconnection. It also verifies duplicate IDs, database CHECK/NOT NULL constraints using direct SQL, index presence in `sqlite_master`, and an `EXPLAIN QUERY PLAN` check for a name-indexed query.
+
+The runner requires the SQLite JDBC dependency and must be executed before claiming a passing result. See `TESTING.md` for commands. Index existence is distinct from performance improvement: query-planner behavior depends on the query and dataset.
